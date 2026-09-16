@@ -1,0 +1,31 @@
+deploy:
+    name: Deploy Databricks Bundle
+    runs-on: ubuntu-latest
+
+    needs: validate
+
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
+    environment: dev
+
+    env:
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: https://dbc-9cae2a40-8c70.cloud.databricks.com/
+      DATABRICKS_CLIENT_ID: ${{ vars.DATABRICKS_CLIENT_ID }}
+
+    defaults:
+      run:
+        working-directory: databricks
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Validate bundle
+        run: databricks bundle validate -t dev
+
+      - name: Deploy bundle
+        run: databricks bundle deploy -t de
