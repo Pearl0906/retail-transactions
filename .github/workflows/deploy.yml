@@ -3,10 +3,10 @@ name: Deploy Databricks Bundle
 on:
   push:
     branches:
-      - main 
+      - main # Targets your newly renamed default branch
 
 permissions:
-  id-token: write
+  id-token: write # Mandatory for OIDC login validation
   contents: read
 
 jobs:
@@ -28,10 +28,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Databricks CLI
-        uses: databricks/setup-cli@v1
+        uses: databricks/setup-cli@main # FIXED: Changed from @v1 to @main
 
       - name: Validate bundle
         run: databricks bundle validate -t dev
 
       - name: Deploy bundle
         run: databricks bundle deploy -t dev
+
