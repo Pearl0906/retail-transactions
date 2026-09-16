@@ -1,0 +1,15 @@
+bundle:
+  name: retail_transaction
+
+include:
+  - resources/*.yml
+
+variables:
+  warehouse_id:
+    description: "SQL Warehouse used by the analytics jobs"
+    default: "656aaa51389eb4fa"
+
+targets:
+  dev:
+    mode: development
+    default: true
