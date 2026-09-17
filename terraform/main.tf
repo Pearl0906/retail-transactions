@@ -1,5 +1,5 @@
 module "schema" {
-  source = "./modules/schema"
+  source = "./terraform/modules/schema"
 
   for_each = local.schema
 
@@ -9,7 +9,7 @@ module "schema" {
 }
 
 module "raw_volume" {
-  source = "./modules/volume"
+  source = "./terraform/modules/volume"
 
   catalog_name = local.catalog_name
   schema_name  = "bronze"
@@ -20,7 +20,7 @@ module "raw_volume" {
 }
 
 module "permissions" {
-  source = "./modules/permissions"
+  source = "./terraform/modules/permissions"
 
   catalog_name       = local.catalog_name
   schema_names       = var.schema_names
