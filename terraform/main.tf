@@ -16,7 +16,7 @@ module "raw_volume" {
   volume_name  = var.volume_name
   comment      = "Managed volume containing the five raw marketing and e-commerce CSV datasets"
 
-  depends_on = [ module.schemas ]
+  depends_on = [module.schemas]
 }
 
 module "permissions" {
@@ -28,8 +28,8 @@ module "permissions" {
   volume_name        = var.volume_name
   principal          = var.permission_principal
 
-  depends_on = [ 
+  depends_on = [
     module.schemas,
-    module.raw_volume 
+    module.raw_volume
   ]
 }
