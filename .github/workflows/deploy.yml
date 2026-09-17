@@ -1,0 +1,39 @@
+name: Deploy Databricks Bundle
+
+on:
+  push:
+    branches:
+      - main # Targets your newly renamed default branch
+
+permissions:
+  id-token: write # Mandatory for OIDC login validation
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy Databricks Bundle
+    runs-on: ubuntu-latest
+    environment: dev
+
+    env:
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: https://dbc-9cae2a40-8c70.cloud.databricks.com/
+      DATABRICKS_CLIENT_ID: ${{ vars.DATABRICKS_CLIENT_ID }}
+
+    defaults:
+      run:
+        working-directory: databricks
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main # FIXED: Changed from @v1 to @main
+
+      - name: Validate bundle
+        run: databricks bundle validate -t dev
+
+      - name: Deploy bundle
+        run: databricks bundle deploy -t dev
+
