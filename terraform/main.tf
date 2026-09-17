@@ -30,6 +30,6 @@ module "permissions" {
 
   depends_on = [
     module.schema,
-    module.raw_volume
+    module.volume
   ]
 }
