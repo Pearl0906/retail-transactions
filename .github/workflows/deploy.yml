@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   deploy:
-    name: Deploy Databricks Bundle
+    name: Validate Databricks Bundle
     runs-on: ubuntu-latest
     environment: dev
 
