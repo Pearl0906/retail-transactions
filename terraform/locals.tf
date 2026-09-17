@@ -1,7 +1,7 @@
 locals {
   catalog_name = var.catalog_name
 
-  schemas = {
+  schema = {
     bronze = {
       comment = "Raw landing layer containing source marketing and e-commerce data"
     }

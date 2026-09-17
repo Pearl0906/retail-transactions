@@ -1,7 +1,7 @@
-module "schemas" {
+module "schema" {
   source = "./modules/schema"
 
-  for_each = local.schemas
+  for_each = local.schema
 
   catalog_name = local.catalog_name
   schema_name  = each.key
@@ -16,7 +16,7 @@ module "raw_volume" {
   volume_name  = var.volume_name
   comment      = "Managed volume containing the five raw marketing and e-commerce CSV datasets"
 
-  depends_on = [module.schemas]
+  depends_on = [module.schema]
 }
 
 module "permissions" {
@@ -29,7 +29,7 @@ module "permissions" {
   principal          = var.permission_principal
 
   depends_on = [
-    module.schemas,
+    module.schema,
     module.raw_volume
   ]
 }

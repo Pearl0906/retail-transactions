@@ -6,7 +6,7 @@ output "catalog_name" {
 output "schemas" {
   description = "Schemas created by Terraform"
   value = {
-    for name, schema in module.schemas :
+    for name, schema in module.schema :
     name => schema.schema_name
   }
 }
